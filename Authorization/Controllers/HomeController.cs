@@ -47,6 +47,7 @@ namespace Authorization.Controllers
         public IActionResult Secret()
         {
             return View();
+            //Cha
         }
         [HttpPost("Home/Login")]
         public IActionResult Verify(string username,string password,string ReturnUrl)
@@ -57,7 +58,7 @@ namespace Authorization.Controllers
                 claims.Add(new Claim(ClaimTypes.NameIdentifier, username));
                 claims.Add(new Claim(ClaimTypes.Name, username));
                 claims.Add(new Claim(ClaimTypes.Role, "Admin"));
-                claims.Add(new Claim(ClaimTypes.Role, "Dev"));
+                
 
 
                 //Claim
