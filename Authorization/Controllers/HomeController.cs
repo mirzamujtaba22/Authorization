@@ -43,21 +43,21 @@ namespace Authorization.Controllers
         {
             return View();
         }
-        [Authorize(Roles ="Admin,Dev")]
+        [Authorize(Roles ="Admin")]
         public IActionResult Secret()
         {
             return View();
         }
         [HttpPost("Home/Login")]
-        public IActionResult Verify(string username,string password,string ReturnedUrl)
+        public IActionResult Verify(string username,string password,string ReturnUrl)
         {
-            if(username=="sam" || password == "sam")
+            if(username=="mujtaba" || password == "mujtaba")
             {
                 List<Claim> claims = new List<Claim>();
                 claims.Add(new Claim(ClaimTypes.NameIdentifier, username));
                 claims.Add(new Claim(ClaimTypes.Name, username));
-                claims.Add(new Claim(ClaimTypes.Name, "Admin"));
-                //claims.Add(new Claim(ClaimTypes.Name, "Dev"));
+                claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+                claims.Add(new Claim(ClaimTypes.Role, "Dev"));
 
 
                 //Claim
@@ -66,7 +66,7 @@ namespace Authorization.Controllers
                 ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                 HttpContext.SignInAsync(claimsPrincipal);
                 //ClaimsPrinciple
-                return Redirect(ReturnedUrl);
+                return Redirect(ReturnUrl);
 
             }
             return BadRequest();
